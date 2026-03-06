@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>浅笑起始页</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        html{
+            cursor: url(BLOG_cursor.ico),auto;
+            overflow: hidden;
+        }
+        body{
+            background: #f5f5f5;
+        }
+        .input{
+            width: 50%;
+            margin: 25vh auto 0;
+            padding:1%;
+        }
+        .input input{
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding:2px 1%;
+            outline: none;
+        }
+        .div_list{
+            width: 50%;
+            margin: 0% auto 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content:left;
+            align-items: center;
+        }
+        .div_list .div_item{
+            width: 5%;
+            aspect-ratio: 1 / 1;
+            margin-left:4%;
+            margin-top: 4%;
+            border-radius: 12px;
+            background-color: #fff;
+            cursor: pointer;
+            position: relative;
+            transition: all .5s ease;
+            overflow: hidden;
+            box-shadow: 2px 2px 5px #ccc;
+        }
+        .div_list .div_item :hover{
+            transform: scale(1.1);
+            
+        }
+        .div_list .div_item .div_title:hover {
+            opacity: 1;
+            background: rgba(0,0,0,0.5);
+            color: #fff;
+        }
+        .div_list .div_item .div_img img{
+            width: 100%;
+            height: 100%;
+        }
+        .div_list .div_item .div_title{
+            font-size: 10px;
+            text-align: center;
+            position: absolute;
+            top:0;
+            width: 100%;
+            aspect-ratio: 1/1;
+            opacity: 0;
+            transition: all .3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .modelDisLog{
+            background: #fff;
+            width: 20%;
+            margin: 0 auto;
+            position: absolute;
+            left: 38%;
+            top: 29%;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            padding: 1%;
+            border-radius: 10px;
+            display:none;
+        }
+        .modelDisLog .dislog_itm{
+
+        }
+        .modelDisLog .dislog_itm .dislog_itm_title{
+
+        }
+        .modelDisLog .dislog_itm .dislog_itm_input{
+
+        }
+        .modelDisLog .dislog_itm .dislog_itm_input input{
+            width: 100%;
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding:2px 1%;
+            outline: none;
+            margin-bottom: 10px;
+        }
+        .div_btn{
+            text-align: right;
+            margin-right: -7px;
+        }
+        .btn{
+            padding: 10px 19px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all .5s ease;
+        }
+        .btn:hover{
+            background: #fff;
+            transform: scale(1.1);
+        }
+        #menu{
+            display: none;
+            background: #fff;
+            width: 5%;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: absolute;
+        }
+        .menu_itm{
+            padding:5px 8px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .menu_itm:hover{
+            background: #eee;
+        }
+        #notes,#configBox{
+            display: none;
+            background: #fff;
+            width: 40%;
+            aspect-ratio: 3/2;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            position: absolute;
+            top:15%;
+            left: 30%;
+        }
+        .notes_top{
+            padding:10px 15px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .notes_box{
+            display: flex;
+            
+        }
+        .notes_tree{
+            width: 30%;
+            border-right: 1px solid #eee;
+        }
+        .notes_search{
+            text-align: center;
+        }
+        .notes_search input{
+            width: 85%;
+            height: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding:2px 3%;
+            outline: none;
+        }
+        .notes_add{
+            width: 0px;
+            transform: rotate(45deg);
+            cursor: pointer;
+            margin-left: 15px;
+            padding:5px;
+            font-weight: bold;
+        }
+        
+        .notes_list{
+            width: 100%;
+            margin-top: 10px;
+        }
+        .notes_list_itm{
+            padding:5px 15px;
+            cursor: pointer;
+        }
+        .notes_list_itm:hover{
+            background: #eee;
+        }
+        .notes_right{
+            width: 70%;
+        }
+        .notes_content{
+            width: 90%;
+            aspect-ratio: 7/5.5;
+            padding:3%;
+        }
+        .notes_content::-webkit-scrollbar,
+        .notes_list::-webkit-scrollbar,
+        .notes_content_text::-webkit-scrollbar{
+            display: none;
+        }
+        .notes_content_title{
+            padding-bottom: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+        .notes_content_text{
+            width: 95.8%;
+            padding:2%;
+            aspect-ratio: 5/3.46;
+            border: none;
+            color:#444;
+            outline: none;
+        }
+        .notes_saveBtn{
+            width: 97%;
+            text-align: right;
+        }
+        .notes_saveBtn button{
+            border: none;
+            padding:10px 15px;
+            cursor: pointer;
+        }
+        #note_list_menu{
+            display: none;
+            background: #fff;
+            width: 5%;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: absolute;
+        }
+        @media only screen and (max-width: 767px){
+        #sidebar_search_box input[type=text]{width:calc(100% - 24px)}
+        }
+        .CR{
+            width: 5%;
+            display: none;
+            position:absolute;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .CR_itm{
+            background: #fff;
+            padding: 4% 0 4% 5%;
+        }
+        .CR_itm:hover{
+            background: #eee;
+        }
+        .tool{
+            display: flex;
+            width: 46%;
+            margin: 1% auto 0;
+        }
+        .tool_itm{
+            font-size: 20px;
+            margin-right: 10px;;
+        }
+        #loginBox{
+            position: absolute;
+            width: 10.5%;
+            margin: -5% 45.25%;
+            background: #fff;
+            box-shadow: 0 0 5px #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: none;
+        }
+        .loginBox_itm{
+            margin: 10px;
+        }
+        .loginBox_itm input{
+            height: 30px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            padding: 0px 2%;
+            outline: none;
+        }
+        .loginBox_itm button{
+            padding: 5px 73px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .loginBox_itm span{
+            cursor: pointer;
+            font-size: 12px;
+        }
+        .loginBox_itm span:hover{
+            text-decoration: underline;
+        }
+        #bgDig{
+            background: rgba(0,0,0,0.2);
+            position:absolute;
+            top:0;
+            width: 100%;
+            aspect-ratio: 1/1;
+            display: none;
+        }
+        #clock_container{
+            width: 100%;
+            position:absolute;
+            top: 7vh;
+            transform: scale(0.8);
+        }
+        #clock_container iframe{
+            width: 100%;
+        }
+        #clock_container .clock {
+            color: #000;
+            font-size: 5rem;
+            font-weight: bold;
+            letter-spacing: 0.2rem;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        #clock_container .date {
+            color: #333;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 时钟 -->
+        <div id="clock_container">
+            <!-- <iframe src="./OnClock/index.html" frameborder="0"></iframe> -->
+            <div class="clock" id="time"></div>
+            <div class="date" id="date"></div>
+        </div>
+
+        <div class="input">
+            <input type="url" id="search_input">
+        </div>
+        <div class="div_list">
+            <!-- 动态生成 -->
+        </div>
+
+        <!-- 工具右键 -->
+        <div class="tool">
+            <span class="tool_itm" id="tool_settings">⚙️</span>
+            <span class="tool_itm use_itm" id="tool_user">😀</span>
+            <span class="tool_itm tip_itm" id="tool_config">🏷️</span>
+        </div>
+        <div class="CR" id="cr_menu">
+            <div class="CR_itm" id="export_btn">导出</div>
+            <div class="CR_itm" id="import_container" style="position: relative;overflow: hidden;">
+                导入
+                <input type="file" id="import_file" style="position: absolute;left:0;opacity: 0;">
+            </div>
+        </div>
+
+        <!-- 模态框 -->
+        <div class="modelDisLog" id="modelDisLog">
+            <div class="dislog_itm">
+                <div class="dislog_itm_input">
+                    <span>名称：</span><input type="text" class='input_name' id="dialog_name" placeholder="名称"/>
+                </div>
+            </div>
+            <div class="dislog_itm">
+                <div class="dislog_itm_input">
+                    地址：<input type="text" class='input_url' id="dialog_url" placeholder="地址"/>
+                </div>
+            </div>
+            <div class="dislog_itm">
+                <div class="dislog_itm_input">
+                    <div style="display: flex;justify-content: left;line-height: 27px;">
+                        <div style="margin-right:10px;">图标自定义</div>
+                        <input id="isIconCustomer" type="checkbox" style="width: 15px;">
+                    </div>
+                </div>
+            </div>
+            <div class="dislog_itm" id="input_icon" style="display: none;">
+                <div class="dislog_itm_input">
+                    icon地址：<input type="text" class='input_icon' id="dialog_icon" placeholder="icon地址"/>
+                </div>
+            </div>
+            <div class="dislog_itm">
+                <div class="div_btn">
+                    <button class="btn" id="dialog_cancel">取消</button>
+                    <button class="btn" id="dialog_confirm">确定</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 右键菜单 -->
+        <div id="menu">
+            <div class="menu_itm" id="menu_edit">编辑</div>
+            <div class="menu_itm" id="menu_delete">删除</div>
+        </div>
+
+        <!-- 记事本 -->
+        <div id="notes">
+            <div class="notes_top">
+                <h3 class="notes_title">记事本</h3>
+                <h3 class="notes_title" id="notes_close" style="cursor: pointer;">✕</h3>
+            </div>
+            <div class="notes_box">
+                <div class="notes_tree">
+                    <div class="notes_search">
+                        <input class="notes_search_input" type="text" placeholder="搜索">
+                    </div>
+                    <div class="notes_add" id="notes_add">✕</div>
+                    <div class="notes_list">
+                        <!-- 动态生成 -->
+                    </div>
+                </div>
+                <div class="notes_right">
+                    <div class="notes_content">
+                        <div class="notes_content_title">
+                            <h2>标题</h2>
+                        </div>
+                        <textarea class="notes_content_text" cols="" rows="">正文</textarea>
+                    </div>
+                    <div class="notes_saveBtn">
+                        <button id="notes_save">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 记事本右键菜单 -->
+        <div id="note_list_menu">
+            <div class="notes_list_itm" id="note_list_delete">删除</div>
+        </div>
+
+        <!-- 登录框 -->
+        <div id="loginBox">
+            <p id="login_close">✕</p>
+            <div class="loginBox_itm">
+                <input type="text" placeholder="用户名" class="input_user" id="login_username">
+            </div>
+            <div class="loginBox_itm">
+                <input type="password" placeholder="密码" class="input_pwd" id="login_password">
+            </div>
+            <div class="loginBox_itm">
+                <button id="login_btn">登录</button>
+            </div>
+            <div class="loginBox_itm">
+                <span id="local_login">本地登录</span>
+            </div>
+        </div>
+        <!-- 配置框 -->
+        <div id="configBox">开发中...</div>
+        <!-- 弹框背景 -->
+        <div id="bgDig"></div>
+    </div>
+
+    <!-- 引入外部JavaScript文件 -->
+    <script src="script.js"></script>
+</body>
+</html>

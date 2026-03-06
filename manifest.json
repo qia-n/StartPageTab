@@ -1,0 +1,18 @@
+{
+  "manifest_version": 3,
+  "name": "浅笑起始页",
+  "version": "1.0",
+  "description": "",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "permissions": [],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'; img-src * data:;"
+  }
+}
